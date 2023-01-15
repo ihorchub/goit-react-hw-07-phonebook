@@ -5,3 +5,5 @@ export const exempleContacts = [
   { id: 'id-4', name: 'Gas service', number: '104' },
   { id: 'id-5', name: 'Emergency service', number: '112' },
 ];
+
+// const defaultUrl = 'https://63c45adbf0028bf85fa7451c.mockapi.io';

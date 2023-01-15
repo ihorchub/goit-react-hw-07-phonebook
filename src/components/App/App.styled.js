@@ -19,3 +19,8 @@ export const ContactsWrapper = styled.div`
   box-shadow: rgb(0 0 0) 2px 2px 10px 0px inset,
     rgb(0 0 0 / 0%) 3px 3px 10px 5px;
 `;
+
+export const ContactsListWrapper = styled.div`
+  max-height: 150px;
+  overflow: auto;
+`;

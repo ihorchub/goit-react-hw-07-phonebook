@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 import {
   AddContactForm,
@@ -23,7 +23,7 @@ const validationSchema = yup.object().shape({
     .string()
     .matches(namePattern, 'Name is not valid')
     .required('this field is required'),
-  number: yup
+  phone: yup
     .string()
     .matches(phonePattern, 'Phone number is not valid')
     .required('this field is required'),
@@ -31,17 +31,17 @@ const validationSchema = yup.object().shape({
 
 const initialValues = {
   name: '',
-  number: '',
+  phone: '',
 };
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
-  const handleSubmit = ({ name, number }, { resetForm }) => {
+  const handleSubmit = ({ name, phone }, { resetForm }) => {
     contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())
       ? alert(`${name} is already in contacts.`)
-      : dispatch(addContact(name, number));
+      : dispatch(addContact({ name, phone }));
     resetForm();
   };
 
@@ -65,10 +65,10 @@ export const ContactForm = () => {
           Number
           <Input
             type="tel"
-            name="number"
+            name="phone"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           />
-          <FormError name="number" />
+          <FormError name="phone" />
         </Label>
         <ButtonSubmit type="submit">Add contact</ButtonSubmit>
       </AddContactForm>
