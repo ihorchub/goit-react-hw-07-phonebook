@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import {
   AddContactForm,
   Input,
@@ -36,7 +36,7 @@ const initialValues = {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = ({ name, phone }, { resetForm }) => {
     contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())

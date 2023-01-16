@@ -1,25 +1,19 @@
-import {
-  getContacts,
-  getFilter,
-  getIsLoading,
-  getError,
-} from 'redux/selectors';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ContactItem } from 'components/ContactItem/ContactItem';
 import { ListElem } from './ContactList.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
-
-const getVisibleContacts = (items, filter) =>
-  items.filter(item => item.name.toLowerCase().includes(filter.toLowerCase()));
+import {
+  selectIsLoading,
+  selectError,
+  selectVisibleContacts,
+} from 'redux/selectors';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
-  const items = useSelector(getContacts);
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
-  const visibleContacts = getVisibleContacts(items, filter);
+  const visibleContacts = useSelector(selectVisibleContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
